@@ -1,0 +1,356 @@
+/* src/pages/TaxcCalculator.css */
+
+/* --- Overall Page Layout (similar to analytics-page-container) --- */
+.poolAndAside {
+  display: flex;
+  min-height: 100vh;
+  background: #0a0a0a; /* True black background */
+  color: #ffffff; /* Default text color */
+}
+
+/* --- Sidebar (Copied for consistency across all analysis pages) --- */
+.sidebar {
+  width: 250px; /* Fixed width for sidebar */
+  background-color: #1a1a1a; /* Darker grey for sidebar */
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
+  position: sticky; /* Makes sidebar stick on scroll */
+  top: 0; /* Adjust if a global header is present, otherwise 0 */
+  height: 100vh; /* Fill remaining viewport height */
+  overflow-y: auto; /* Scrollable sidebar if content overflows */
+}
+
+/* Adjust top for header if present in the main app layout */
+/* If the main app has a fixed header, adjust sidebar's top and height */
+body:has(.app-header) .sidebar {
+  top: 80px; /* Assuming a fixed header of 80px */
+  height: calc(100vh - 80px);
+}
+
+.sidebar-section {
+  margin-bottom: 2rem;
+}
+
+.sidebar-title {
+  color: #a0a0a0; /* Muted grey for titles */
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #e0e0e0; /* Lighter grey for links */
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle hover background */
+  color: #ffffff;
+}
+
+.sidebar-link.active {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Slightly more prominent active background */
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.sidebar-icon {
+  font-size: 1rem;
+  color: #888888; /* Grey icon color */
+  transition: color 0.2s ease;
+}
+
+.sidebar-link.active .sidebar-icon,
+.sidebar-link:hover .sidebar-icon {
+  color: #ffffff; /* White icon color on active/hover */
+}
+
+/* --- Main Content Area for Tax Calculator Page --- */
+.tax-section {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #0a0a0a; /* Ensure main content area is black */
+  overflow-y: auto; /* Enable scrolling for main content if it overflows */
+}
+
+.tax-container {
+  max-width: 600px; /* Constrain content width */
+  margin: 0 auto; /* Center content */
+}
+
+/* --- Tax Calculator Header (Title & Subtitle) --- */
+.tax-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.tax-title {
+  font-size: 3rem;
+  font-weight: 100;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+  color: #ffffff; /* Set text color to white */
+  /* Removed gradient text effect as per user request */
+}
+
+.tax-subtitle {
+  font-size: 1.15rem;
+  color: #a0a0a0;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* --- Tax Form --- */
+.tax-form {
+  background-color: #1c1c1c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
+
+.tax-form label {
+  display: block;
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  width: 100%; /* Take full width for label to align with input */
+  text-align: left; /* Align label text to left */
+}
+
+.tax-form input[type="number"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #0a0a0a; /* Dark input background */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.tax-form input[type="number"]:focus {
+  outline: none;
+  border-color: #3498db; /* Blue accent on focus */
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+/* Hide arrow buttons for number input */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.term-toggle {
+  margin-bottom: 2rem;
+  width: 100%; /* Take full width */
+  text-align: left; /* Align checkbox and label to left */
+}
+
+.term-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  margin-bottom: 0; /* Remove default margin */
+}
+
+.term-toggle input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.term-toggle input[type="checkbox"]:checked {
+  background-color: #2ecc71; /* Green when checked */
+  border-color: #2ecc71;
+}
+
+.term-toggle input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.term-toggle input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.primary-btn {
+  background: linear-gradient(
+    90deg,
+    #353535,
+    #515252
+  ); /* Blue to Green gradient */
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%; /* Make button full width */
+  margin-bottom: 1.5rem;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.primary-btn.large {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+.tax-result {
+  background-color: #0a0a0a; /* Darker background for result */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%; /* Take full width */
+}
+
+.tax-result h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.tax-result span {
+  color: #2ecc71; /* Green for the calculated tax value */
+  font-weight: 700;
+}
+
+/* --- Mobile Responsiveness (consistent with other analysis pages) --- */
+@media (max-width: 768px) {
+  .poolAndAside {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+  }
+
+  /* Adjust top for header if present in the main app layout */
+  body:has(.app-header) .sidebar {
+    top: 0;
+    height: auto;
+  }
+
+  .tax-section {
+    padding: 1rem;
+  }
+
+  .tax-header {
+    text-align: left;
+  }
+
+  .tax-title {
+    font-size: 2rem;
+  }
+
+  .tax-subtitle {
+    font-size: 1rem;
+  }
+
+  .tax-form {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .tax-form label,
+  .term-toggle label {
+    font-size: 0.9rem;
+  }
+
+  .tax-form input[type="number"] {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .primary-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+
+  .primary-btn.large {
+    padding: 0.9rem 2.2rem;
+    font-size: 1rem;
+  }
+
+  .tax-result {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .tax-result h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tax-title {
+    font-size: 1.8rem;
+  }
+}
